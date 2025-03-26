@@ -49,6 +49,7 @@ public class ThreadOperation extends Thread
 
     // getter
     public int[][] getButter(){return butter;}
+<<<<<<< HEAD
 
     // A static integer array method that determines the indexes needed to iterate over one of the four quadrants.
     public static int[] getQuadrantIndexes(int rows, int columns, String quadrant)
@@ -57,4 +58,6 @@ public class ThreadOperation extends Thread
         int[] molk = new int[rows];
         return molk;
     }
+=======
+>>>>>>> deedbd726c470a78ab5a119bf4cd52731a85e17e
 }
