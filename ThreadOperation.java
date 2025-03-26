@@ -1,11 +1,12 @@
 /*
 Andrew Achusim
-03/24/2025
+03/26/2025
 Purpose: To add two tegether two integer matricies by implementing concurrent processing through Java multi-threading.
 For ThreadOperation.java, create an object class that takes matracies as input from the constructor and create a 
 quadrant indicator.
 Sources:
     1.) I learend about Threads and how to implement them @ https://www.w3schools.com/java/java_threads.asp.
+    2.) I learned about switches and how to use them @ https://www.w3schools.com/java/java_switch.asp.
 */
 
 public class ThreadOperation extends Thread
@@ -49,15 +50,53 @@ public class ThreadOperation extends Thread
 
     // getter
     public int[][] getButter(){return butter;}
-<<<<<<< HEAD
 
     // A static integer array method that determines the indexes needed to iterate over one of the four quadrants.
     public static int[] getQuadrantIndexes(int rows, int columns, String quadrant)
     {
-        // Filler for javac
-        int[] molk = new int[rows];
+        // An integer array varibale with four spaces.
+        int[] molk = new int[4];
+
+        // An integer variable for containing the value midway through the rows.
+        int rowMid = rows/2;
+        // An integer variable for containing the value midway through the columns.
+        int colMid = columns/2;
+
+        // A switch statement that runs through one of the four cases
+        // if the value of the String object matches one of the cases.
+        switch(quadrant)
+        {
+            // Case 1: Collects the revealent data for the "upper left" of the given matrix.
+            case "upper left":
+                molk[0] = 0;
+                molk[1] = rowMid;
+                molk[2] = 0;
+                molk[3] = colMid;
+                break;
+            // Case 2: Collects the revealent data for the "upper right" of the given matrix.
+            case "upper right":
+                molk[0] = 0;
+                molk[1] = rowMid;
+                molk[2] = colMid;
+                molk[3] = columns;
+                break;
+            // Case 3: Collects the revealent data for the "lower left" of the given matrix.
+            case "lower left":
+                molk[0] = rowMid;
+                molk[1] = rows;
+                molk[2] = 0;
+                molk[3] = colMid;
+                break;
+            // Case 4: Collects the revealent data for the "lower right" of the given matrix.
+            case "lower right":
+                molk[0] = rowMid;
+                molk[1] = rows;
+                molk[2] = colMid;
+                molk[3] = columns;
+                break;
+        }
+
+        // Returns the collected value of the integer array object.
         return molk;
     }
-=======
->>>>>>> deedbd726c470a78ab5a119bf4cd52731a85e17e
 }
