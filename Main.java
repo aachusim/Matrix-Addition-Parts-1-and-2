@@ -1,6 +1,6 @@
 /*
 Andrew Achusim
-03/24/2025
+03/27/2025
 Purpose: To add two tegether two integer matricies by implementing concurrent processing through Java multi-threading.
 For Main.java, start and join four ThreadOperatiion objects, write a static method called print2dArray.
 Sources:
@@ -61,12 +61,20 @@ public class Main
             int[][] milk = matrixFromFile(rows, columns, fileReader);
             int[][] malk = matrixFromFile(rows, columns, fileReader);
 
-            // Four ThreadOperation objects for submatrix addition.
-            ThreadOperation t1 = new ThreadOperation(milk, malk, new int[rows / 2][columns / 2], 0, rows / 2, 0, columns / 2);
-            ThreadOperation t2 = new ThreadOperation(milk, malk, new int[rows / 2][columns - columns / 2], 0, rows / 2, columns / 2, columns);
-            ThreadOperation t3 = new ThreadOperation(milk, malk, new int[rows - rows / 2][columns / 2], rows / 2, rows, 0, columns / 2);
-            ThreadOperation t4 = new ThreadOperation(milk, malk, new int[rows - rows / 2][columns - columns / 2], rows / 2, rows, columns / 2, columns);
+            // An integer array object that contains the data of a ThreadOperation object geared for the "upper left".
+            int[] upperLeft = ThreadOperation.getQuadrantIndexes(rows, columns, "upper left");
+            // An integer array object that contains the data of a ThreadOperation object geared for the "upper right".
+            int[] upperRight = ThreadOperation.getQuadrantIndexes(rows, columns, "upper right");
+            // An integer array object that contains the data of a ThreadOperation object geared for the "lower left".
+            int[] lowerLeft = ThreadOperation.getQuadrantIndexes(rows, columns, "lower left");
+            // An integer array object that contains the data of a ThreadOperation object geared for the "lower right".
+            int[] lowerRight = ThreadOperation.getQuadrantIndexes(rows, columns, "lower right");
 
+            // Four ThreadOperation objects for submatrix addition.
+            ThreadOperation t1 = new ThreadOperation(milk, malk, new int[upperLeft[1] - upperLeft[0]][upperLeft[3] - upperLeft[2]], upperLeft[0], upperLeft[1], upperLeft[2], upperLeft[3]);
+            ThreadOperation t2 = new ThreadOperation(milk, malk, new int[upperRight[1] - upperRight[0]][upperRight[3] - upperRight[2]], upperRight[0], upperRight[1], upperRight[2], upperRight[3]);
+            ThreadOperation t3 = new ThreadOperation(milk, malk, new int[lowerLeft[1] - lowerLeft[0]][lowerLeft[3] - lowerLeft[2]], lowerLeft[0], lowerLeft[1], lowerLeft[2], lowerLeft[3]);
+            ThreadOperation t4 = new ThreadOperation(milk, malk, new int[lowerRight[1] - lowerRight[0]][lowerRight[3] - lowerRight[2]], lowerRight[0], lowerRight[1], lowerRight[2], lowerRight[3]);
 
             // Starts all threads.
             t1.start();
